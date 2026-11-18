@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import BuyingGuide from './BuyingGuide';
 import { catalog, priceText, productUrl } from './catalog';
 
 const specs = [
@@ -37,7 +38,7 @@ export default function Home() {
     <>
       <header className="top"><div className="wrap header-inner">
         <a className="logo" href="#"><span className="logo-mark" aria-hidden="true">▣</span> PC<span>픽</span></a>
-        <nav aria-label="주 메뉴"><a href="#builds">게이밍 PC</a><a href="#pricing">가격 기준</a></nav>
+        <nav aria-label="주 메뉴"><a href="#guide">PC 선택</a><a href="#builds">사양 비교</a><a href="#checklist">구매 체크</a></nav>
       </div></header>
       <main className="wrap">
         <section className="hero">
@@ -45,10 +46,12 @@ export default function Home() {
             <p className="eyebrow"><i /> 게이밍 PC 구매 가이드</p>
             <h1>게임용 PC,<br /><em>사양부터 가격까지.</em></h1>
             <p className="intro">FHD부터 4K까지. 원하는 해상도와 예산으로<br className="desktop-br" /> 완제품 조립 PC를 골라 비교하세요.</p>
-            <a className="primary" href="#builds">추천 사양 보기 <span aria-hidden="true">↓</span></a>
+            <a className="primary" href="#guide">내 게임에 맞는 PC 찾기 <span aria-hidden="true">↓</span></a>
           </div>
           <div className="hero-art" aria-hidden="true" />
         </section>
+
+        <BuyingGuide onShowCandidate={(resolution) => { setTier(resolution); setBudget(''); setQuery(''); }} />
 
         <section id="builds" className="builds">
           <div className="section-head"><div><h2>해상도별 게이밍 PC</h2><p>본체 기준 · 운영체제 미포함</p></div>
@@ -71,7 +74,7 @@ export default function Home() {
           </div>
 
           <div className="grid">
-            {builds.map((build) => <article key={build.id} className={'card build-' + build.id}>
+            {builds.map((build) => <article id={'build-' + build.id} key={build.id} className={'card build-' + build.id}>
               <div className="card-top"><span className="tier">{build.tier}</span><label className="check"><input type="checkbox" checked={selected.includes(build.id)} onChange={() => toggle(build.id)} aria-label={build.title + ' 비교 선택'} /> 비교</label></div>
               <h3>{build.title}</h3><p className="product">{build.detail}</p>
               <dl>{specs.slice(0, 5).map(([label, key]) => <div key={key}><dt>{label}</dt><dd>{build[key]}</dd></div>)}</dl>

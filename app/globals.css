@@ -82,3 +82,19 @@ thead th,td a{color:var(--mint)}
 nav{gap:12px}
 .section-head{align-items:flex-start}
 }
+
+.guide { margin-top: 28px; padding: clamp(16px, 3vw, 26px); background: var(--panel); border: 1px solid var(--line); border-radius: 15px; }
+.guide-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr)); gap: 12px; margin-top: 14px; }
+.guide-inputs label { display: grid; gap: 5px; font-size: 13px; color: var(--muted); }
+.guide-inputs select, .guide-inputs input:not([type=checkbox]) { width: 100%; }
+.guide-result { min-width: 0; margin-top: 16px; padding: 16px; border: 1px solid #367566; border-radius: 10px; background: #102424; }
+.guide-result h3 { margin: 0; color: var(--mint); }
+.guide-result p { margin-top: 6px; color: var(--muted); font-size: 14px; }
+.guide-result .budget-note { color: #ffcf91; }
+.guide-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 12px; color: var(--mint); font-size: 14px; }
+.guide-links a:hover { text-decoration: underline; }
+.purchase-checks { display: grid; gap: 8px; }
+.purchase-checks label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px 0; }
+.purchase-checks label span span { display: block; color: var(--muted); font-size: 14px; }
+.purchase-checks input { accent-color: var(--mint); margin-top: 6px; }
+.card:target { outline: 2px solid var(--mint); outline-offset: 3px; }
