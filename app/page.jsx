@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { catalog, priceText, productUrl } from './catalog';
 
 const specs = [
@@ -15,6 +15,12 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState([]);
   const [showCompare, setShowCompare] = useState(false);
+
+  const compareHeading = useRef(null);
+
+  useEffect(() => {
+    if (showCompare) compareHeading.current?.focus();
+  }, [showCompare]);
 
   const builds = catalog.filter((build) =>
     (tier === '전체' || build.tier === tier) &&
@@ -65,7 +71,7 @@ export default function Home() {
           </div>
 
           <div className="grid">
-            {builds.map((build) => <article key={build.id} className={'card ' + build.id}>
+            {builds.map((build) => <article key={build.id} className={'card build-' + build.id}>
               <div className="card-top"><span className="tier">{build.tier}</span><label className="check"><input type="checkbox" checked={selected.includes(build.id)} onChange={() => toggle(build.id)} aria-label={build.title + ' 비교 선택'} /> 비교</label></div>
               <h3>{build.title}</h3><p className="product">{build.detail}</p>
               <dl>{specs.slice(0, 5).map(([label, key]) => <div key={key}><dt>{label}</dt><dd>{build[key]}</dd></div>)}</dl>
@@ -77,7 +83,7 @@ export default function Home() {
         </section>
 
         {showCompare && <section className="comparison" aria-labelledby="comparison-title">
-          <div className="section-head"><h2 id="comparison-title">선택한 PC 사양 비교</h2><button onClick={() => setShowCompare(false)}>비교표 닫기</button></div>
+          <div className="section-head"><h2 id="comparison-title" ref={compareHeading} tabIndex={-1}>선택한 PC 사양 비교</h2><button onClick={() => setShowCompare(false)}>비교표 닫기</button></div>
           {compared.length < 2 ? <p>비교할 PC를 두 대 이상 선택하세요.</p> : <div className="table-scroll"><table>
             <thead><tr><th scope="col">항목</th>{compared.map((build) => <th key={build.id} scope="col">{build.title}</th>)}</tr></thead>
             <tbody>
