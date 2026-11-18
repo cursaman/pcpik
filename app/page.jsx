@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Benchmarks from './Benchmarks';
 import BuyingGuide from './BuyingGuide';
 import { catalog, priceText, productUrl } from './catalog';
 
@@ -38,7 +39,7 @@ export default function Home() {
     <>
       <header className="top"><div className="wrap header-inner">
         <a className="logo" href="#"><span className="logo-mark" aria-hidden="true">▣</span> PC<span>픽</span></a>
-        <nav aria-label="주 메뉴"><a href="#guide">PC 선택</a><a href="#builds">사양 비교</a><a href="#checklist">구매 체크</a></nav>
+        <nav aria-label="주 메뉴"><a href="#guide">PC 선택</a><a href="#builds">사양 비교</a><a href="#benchmarks">게임 성능</a></nav>
       </div></header>
       <main className="wrap">
         <section className="hero">
@@ -96,6 +97,8 @@ export default function Home() {
             </tbody>
           </table></div>}
         </section>}
+
+        <Benchmarks />
 
         <section className="pricing" id="pricing"><h2>가격 기준</h2>
           <p>2026년 11월 18일 조사한 다나와 웹 자료를 참고가로 표시합니다. 수집 시점은 상품마다 다릅니다. 현재 결제 금액, 배송비 및 재고는 상품 링크에서 확인하세요.</p>
